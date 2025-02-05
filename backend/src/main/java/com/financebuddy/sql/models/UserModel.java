@@ -1,20 +1,21 @@
 package com.financebuddy.sql.models;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Document(collection = "users")
 public class UserModel {
-    private String name;
-    private String password;
-
-    public UserModel(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
     
+    @Id
+    private String id;
+
+    private String name;
+    private String email;
+    private String password;
 }
