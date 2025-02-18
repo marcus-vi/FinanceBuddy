@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import BlueButton from "../components/BlueButton";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
@@ -8,6 +9,12 @@ function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const goToLogin = () => {
+    navigate("/login");
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -58,9 +65,7 @@ function Register() {
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100">
       <div className="absolute inset-0 bg-gray-300/60"></div>
-      <a href="./login" className="text-white">
-        <BlueButton text="login" className="absolute m-4 top-2 right-2" />
-      </a>
+        <BlueButton text="Sign in" className="absolute m-4 top-2 right-2" onClick={goToLogin}/>
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md relative">
         <h1 className="text-2xl font-bold mb-6">Register</h1>
         <form>
@@ -116,7 +121,7 @@ function Register() {
             {error && <p className="text-red-500 text-xs italic">{error}</p>}
           </div>
           <div className="flex items-center gap-20 w-full">
-            <BlueButton text="register" onClick={handleLogin} />
+            <BlueButton text="Register" onClick={handleLogin} />
             {loading && (
               <div className="p-3 border-r border-gray-800 rounded-full animate-spin relative "></div>
             )}
