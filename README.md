@@ -12,10 +12,8 @@ Este é um sistema simples de gestão de contas a pagar e a receber, projetado p
 ## Tecnologias
 
 - **Java 23**
-- **MySQL** (Banco de Dados)
-- **Hibernate** (ORM)
-- **JUnit** (Testes)
-- **Scanner** (Entrada de dados no terminal)
+- **MangoDB** (Banco de Dados)
+- **React**
 
 ## Estrutura do Projeto
 
