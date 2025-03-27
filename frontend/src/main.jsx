@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./App.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import HomePage from "./pages/HomePage.jsx";
 import { useAuth, AuthProvider } from "./AuthContext.jsx";
 
 const AuthWrapper = ({ children }) => {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: "/home",
+    element: <HomePage />,
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(

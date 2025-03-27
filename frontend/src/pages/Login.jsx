@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import BlueButton from "../components/BlueButton";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
+import grafico from "../assets/grafico.png";
+import { X } from 'lucide-react';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -43,8 +46,7 @@ function Login() {
 
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-        window.location.href = "/";
+        navigate("/");
       }
     } catch (error) {
       if (error?.response?.status === 400) {
@@ -62,10 +64,26 @@ function Login() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100">
-      <div className="absolute inset-0 bg-gray-300/60"></div>
-        <BlueButton text="Register" className="absolute m-4 top-2 right-2" onClick={goToRegister} />
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md relative">
+    <div className="h-screen flex flex-col w-full bg-gray-100">
+      <header className="flex justify-between items-center px-6 py-5 shadow bg-gradient-to-r text-white bg-blue-800 to-blue-600">
+        <div
+          className="flex gap-4 items-center cursor-pointer"
+          onClick={() => navigate("/home")}
+        >
+          <img src={logo} alt="logo" className="h-[40px] w-[40px]" />
+          <h1 className="text-2xl font-bold">FINANCEBUDDY</h1>
+        </div>
+        <div className="flex gap-6 items-center">
+        <BlueButton
+          text="Register"
+          onClick={goToRegister}
+        />
+        <X onClick={() => navigate("/home")} className="cursor-pointer"/>
+        </div>
+      </header>
+
+      <div className="md:flex items-center  w-screen h-full bg-gray-100">
+        <div className="md:w-1/2 h-full relative flex flex-col gap-4 justify-center md:px-28 md:py-20  px-6 py-10">
         <h1 className="text-2xl font-bold mb-6">Login</h1>
         <form>
           <div className="mb-4">
@@ -112,6 +130,14 @@ function Login() {
             </a>
           </div>
         </form>
+      </div>
+      <div className="bg-white h-full md:w-1/2 flex flex-col justify-center items-center px-6 py-10">
+                <div className="max-w-lg mt-18">
+                  <h2 className="text-3xl mb-4 text-blue-800 font-semibold">Seja bem-vindo de volta ao Financebuddy!</h2>
+                  <p className="text-gray-800">uma plataforma completa para gerenciar suas finanças com praticidade, segurança e todos os benefícios que só o nosso sistema pode oferecer!</p>
+                </div>
+                <img src={grafico} alt="" />
+              </div>
       </div>
     </div>
   );

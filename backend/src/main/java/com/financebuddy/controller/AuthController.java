@@ -37,18 +37,22 @@ public class AuthController {
     private UserRepository userRepository;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<Map<String, String>> registerUser(@RequestBody UserRequest userRequest) {
         UserModel user = new UserModel();
         user.setPassword(PasswordUtils.hashPassword(userRequest.getPassword()));
         user.setEmail(userRequest.getEmail());
         user.setName(userRequest.getName());
 
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            return new ResponseEntity<>("User already exists!", HttpStatus.CONFLICT);
+            return new ResponseEntity<>(Map.of("message", "User already exists!"), HttpStatus.CONFLICT);
         }
 
         userRepository.save(user);
-        return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);
+        String token = JwtUtils.generateToken(user.getId(), "access");
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+        response.put("message", "User registered successfully!");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/login")

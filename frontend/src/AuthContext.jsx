@@ -25,7 +25,6 @@ export function AuthProvider({ children }) {
             setToken(response.data.token);
             localStorage.setItem("token", response.data.token);
         } catch (error) {
-            console.log("hihihiha")
             console.error("Session expired or invalid.");
         } finally {
             setLoading(false);
